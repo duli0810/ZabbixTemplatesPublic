@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2020-06-18T14:48:07Z</date>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template SMTP Service Port 587 - Algorix</template>
+            <name>Template SMTP Service Port 587 - Algorix</name>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>SMTP Service Port 587</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>SMTP Port 587  service is running</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[smtp,,587]</key>
+                    <history>1w</history>
+                    <applications>
+                        <application>
+                            <name>SMTP Service Port 587</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <expression>{max(#3)}=0</expression>
+                            <name>SMTP Port 587 service is down on {HOST.NAME}</name>
+                            <priority>AVERAGE</priority>
+                            <description>Autor: Eduardo R. da Silva</description>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <value_maps>
+        <value_map>
+            <name>Service state</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Down</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Up</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
